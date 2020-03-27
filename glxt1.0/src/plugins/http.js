@@ -3,7 +3,8 @@ import axios from 'axios'
 const MyHttpServer={}
 MyHttpServer.install =  (Vue) =>{
     
-    axios.defaults.baseURL = 'http://localhost:3000'
+    //axios.defaults.baseURL = '/api' 
+   //'http://localhost:6070/'
     // 4. 添加实例方法
     Vue.prototype.$http = axios
   }

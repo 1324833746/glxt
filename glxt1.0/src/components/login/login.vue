@@ -10,7 +10,7 @@
         <el-input v-model="formdata.username"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="formdata.passward"></el-input>
+        <el-input v-model="formdata.password"></el-input>
       </el-form-item>
         <el-button 
         @click.prevent="handlelogin()"
@@ -20,42 +20,40 @@
 </template>
 
 <script>
+import axios from 'axios'
+import qs from 'Qs'
 export default {
   data(){
     return{
       top:'',
       formdata:{
         username:'',
-        passward:'',
+        password:'',
       },
     }
   },
   methods:{
     handlelogin(){
-
-      this.$router.push({name:'home'})
-          //提示成功
-      this.$message.success('登陆成功');
-      this.$http.get('message',this.formdata)
+      axios.post('/api/login/in/',this.formdata)
       .then((res)=>{
-        //console.log(res)
-     //   const{
-       //   data,
-      //    meta:{message,status}
+        console.log(res)
+        console.log(this.formdata)
+        console.log(this.formdata.password)
+        const{
+          ret,
+          msg,
 
-
-
-       // } = res.data
+        } = res.data
         //成功  
-        if(status===1){
+        if(ret===0){
           //跳转到home
           this.$router.push({name:'home'})
           //提示成功
-          this.$message.success('错了哦，这是一条错误消息');
+          this.$message.success('登陆成功');
         }
         else
         {
-          this.$message.error('错了哦，这是一条错误消息');
+          this.$message.error(msg);
         }
         
 
