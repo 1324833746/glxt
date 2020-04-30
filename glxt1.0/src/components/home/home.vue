@@ -8,19 +8,19 @@
           <el-col :span="1">
             <img class="header-logo" src="../../../static/hzau_logo.png" alt="hzau" />
           </el-col>
-          <el-col :span="6">
+          <el-col :span="2">
             <div class="div-header-text">
               <a
                 class="header-text"
                 style="font-size:35px;white-space:nowrap;text-decoration:none;"
                 href="#"
-              >华中农业大学图书管理系统</a>
+              >JOIN</a>
             </div>
           </el-col>
           <el-col :span="6"></el-col>
           <el-col :span="2" style="margin:auto;">
             <div class="div-header-loginout">
-              <el-button class="button-loginout" type="danger">退出登录</el-button>
+              <el-button @click.prevent="handlelogout()" class="button-loginout" type="danger">退出登录</el-button>
             </div>
           </el-col>
         </el-row>
@@ -29,21 +29,12 @@
       <el-container style="height: 100%" class="main">
         <el-aside width="200px" class="main-aside">
           <el-menu
-            default-active="2"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
             :router="true"
           >
-            <!--公告-->
-            <el-menu-item index="notice">
-              <i class="el-icon-message-solid"></i>
-              <span slot="title">公告</span>
-            </el-menu-item>
-            <!--个人信息-->
+            <!--我的信息-->
             <el-menu-item index="information">
               <i class="el-icon-s-custom"></i>
-              <span slot="title">个人信息</span>
+              <span slot="title">我的信息</span>
             </el-menu-item>
             <!--图书-->
             <el-submenu index="图书">
@@ -81,16 +72,36 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {};
-  }
-  /*beforeCreate(){
-    const token = localStorage.getItem('token')
-    if(!token){
+  },
+  beforeCreate(){
+    const AUTH_TOKEN = localStorage.getItem('token')
+    console.log(AUTH_TOKEN)
+    axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
+    if(!AUTH_TOKEN){
       this.$router.push({name:'login'})
     }
-  }*/
+    axios.get('/api/users/get?token=1')
+      .then((res)=>{
+        this.$message.success('欢迎回来');       
+      })
+      .catch((error)=>{
+        console.log(error)
+        this.$message.error('登录信息过期');
+        localStorage.removeItem('token');
+        this.$router.push({name:'login'});         
+      })
+  },
+  methods:{
+    handlelogout(){
+      localStorage.removeItem('token');
+      this.$message.success('注销成功');
+      this.$router.push({name:'login'});
+    },
+  }
 };
 </script>
 
