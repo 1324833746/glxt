@@ -105,12 +105,11 @@ export default {
       axios
         .post("/login/", this.formdata)
         .then(res => {
-          console.log(res);
-          console.log(res.status);
+          //console.log(res);
+          //console.log(res.status);
           //console.log(this.formdata)
           //console.log(this.formdata.password)
           this.token = "jwt " + res.data.token;
-          console.log(this.token);
           //成功
           if (res.status === 200) {
             //保存token
@@ -119,6 +118,9 @@ export default {
             const AUTH_TOKEN = localStorage.getItem("token");
             axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
             axios.get("/api/users/get?token=1").then(res => {
+            //保存是否是管理员
+            localStorage.setItem("admin", res.data[0].is_superuser);
+              //console.log("haha"+res.data[0].is_superuser)
               //日期格式化
               Date.prototype.Format = function(fmt) {
                 var o = {

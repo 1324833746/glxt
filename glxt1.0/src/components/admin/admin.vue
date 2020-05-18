@@ -14,10 +14,10 @@
                 class="header-text"
                 style="font-size:35px;white-space:nowrap;text-decoration:none;"
                 href="#"
-              >JOIN</a>
+              >JOIN后台</a>
             </div>
           </el-col>
-          <el-col :span="8"></el-col>
+          <el-col :span="6"></el-col>
           <el-col :span="2" style="margin:auto;">
             <div class="div-header-loginout">
               <el-button @click.prevent="handlelogout()" class="button-loginout" type="danger">退出登录</el-button>
@@ -29,30 +29,30 @@
       <el-container style="height: 100%" class="main">
         <el-aside width="200px" class="main-aside">
           <el-menu :router="true">
-            <!--我的信息-->
-            <el-menu-item index="information">
+            <!--会员管理-->
+            <el-menu-item index="hygl">
               <i class="el-icon-s-custom"></i>
-              <span slot="title">我的信息</span>
+              <span slot="title">会员管理</span>
             </el-menu-item>
-            <!--报名活动-->
-            <el-menu-item index="bmhd">
+            <!--添加活动-->
+            <el-menu-item index="tjhd">
               <i class="el-icon-s-custom"></i>
-              <span slot="title">报名活动</span>
+              <span slot="title">添加活动</span>
             </el-menu-item>
-            <!--结算奖励-->
-            <el-menu-item index="jsjl">
+            <!--活动管理-->
+            <el-menu-item index="hdgl">
               <i class="el-icon-s-custom"></i>
-              <span slot="title">结算奖励</span>
+              <span slot="title">活动管理</span>
             </el-menu-item>
-            <!--我的活动-->
-            <el-menu-item index="wdhd">
+            <!--结算管理 -->
+            <el-menu-item index="jsgl">
               <i class="el-icon-s-custom"></i>
-              <span slot="title">我的活动</span>
+              <span slot="title">结算管理</span>
             </el-menu-item>
-            <!--结算记录-->
-            <el-menu-item index="record">
+            <!--奖品管理-->
+            <el-menu-item index="jpgl">
               <i class="el-icon-s-custom"></i>
-              <span slot="title">结算记录</span>
+              <span slot="title">奖品管理</span>
             </el-menu-item>
           </el-menu>
         </el-aside>
@@ -68,9 +68,7 @@
 import axios from "axios";
 export default {
   data() {
-    return {
-      showadmin:true,
-    };
+    return {};
   },
   beforeCreate() {
     const AUTH_TOKEN = localStorage.getItem("token");
@@ -82,7 +80,14 @@ export default {
     axios
       .get("/api/users/get?token=1")
       .then(res => {
-        this.$message.success("欢迎回来");
+        if (!res.data[0].is_superuser) {
+          this.$message.error("您没有管理员权限");
+          localStorage.removeItem("token");
+          this.$router.push({ name: "login" });
+        } else {
+          this.$router.push({ path: "/admin/#" });
+          this.$message.success("欢迎回来");
+        }
       })
       .catch(error => {
         console.log(error);
@@ -94,13 +99,9 @@ export default {
   methods: {
     handlelogout() {
       localStorage.removeItem("token");
-      localStorage.removeItem("admin");
       this.$message.success("注销成功");
       this.$router.push({ name: "login" });
-    },
-    handleadmin() {
-      this.$router.push({ name: "admin" });
-    },
+    }
   }
 };
 </script>

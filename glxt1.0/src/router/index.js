@@ -2,13 +2,17 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../components/login/login.vue'
 import Home from '../components/home/home.vue'
-import Notice from '@/components/notice/notice.vue'
 import Information from '@/components/information/information.vue'
-import Books from '@/components/books/books.vue'
-import Mybooks from '@/components/mybooks/mybooks.vue'
-import Events from '@/components/events/events.vue'
-import Myevents from '@/components/myevents/myevents.vue'
-import Suggestion from '@/components/suggestion/suggestion.vue'
+import bmhd from '@/components/bmhd/bmhd.vue'
+import jsjl from '@/components/jsjl/jsjl.vue'
+import wdhd from '@/components/wdhd/wdhd.vue'
+import record from '@/components/record/record.vue'
+import Admin from '@/components/admin/admin.vue'
+import Hygl from '@/components/hygl/hygl.vue'
+import tjhd from '@/components/tjhd/tjhd.vue'
+import hdgl from '@/components/hdgl/hdgl.vue'
+import jsgl from '@/components/jsgl/jsgl.vue'
+import jpgl from '@/components/jpgl/jpgl.vue'
 
 Vue.use(Router)
 
@@ -25,9 +29,9 @@ export default new Router({
       component:Home,
       children:[
         {
-          name:'notice',
-          path:'notice',
-          component: Notice,
+          name:'bmhd',
+          path:'bmhd',
+          component: bmhd,
         },
         {
           name:'information',
@@ -35,32 +39,55 @@ export default new Router({
           component: Information,
         },
         {
-          name:'books',
-          path:'books',
-          component: Books,
+          name:'jsjl',
+          path:'jsjl',
+          component: jsjl,
         },
         {
-          name:'mybooks',
-          path:'mybooks',
-          component: Mybooks,
+          name:'wdhd',
+          path:'wdhd',
+          component: wdhd,
         },
         {
-          name:'events',
-          path:'events',
-          component: Events,
-        },
-        {
-          name:'myevents',
-          path:'myevents',
-          component: Myevents,
-        },
-        {
-          name:'suggestion',
-          path:'suggestion',
-          component: Suggestion,
-        },
+          name:'record',
+          path:'record',
+          component: record,
+        }
 
     ]
-    }
+    },
+    {
+      name:'admin',
+      path: '/admin',
+      component:Admin,
+      children:[
+        {
+          name:'Hygl',
+          path:'hygl',
+          component: Hygl,
+        },
+        {
+          name:'tjhd',
+          path:'tjhd',
+          component: tjhd,
+        },
+        {
+          name:'hdgl',
+          path:'hdgl',
+          component: hdgl,
+        },
+        {
+          name:'jsgl',
+          path:'jsgl',
+          component: jsgl,
+        },
+        {
+          name:'jpgl',
+          path:'jpgl',
+          component: jpgl,
+        }
+
+    ]
+    },
   ]
 })
