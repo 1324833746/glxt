@@ -119,7 +119,7 @@ export default {
        this.finish = [];
        this.not_finish = [];
       axios.get("/api/hasrd/get/?id=" + this.t_user).then(res => {
-         console.log(res)
+         //console.log(res)
         var record = res.data;
         axios.get("/api/rewards/").then(res2 => {
           var reward = res2.data;
@@ -167,7 +167,7 @@ export default {
     }
   },
   created() {
-    console.log(this.information);
+    //console.log(this.information);
     const AUTH_TOKEN = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
   }

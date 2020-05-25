@@ -83,7 +83,7 @@ export default {
     },
   },
   created() {
-    console.log(this.information);
+    //console.log(this.information);
     const AUTH_TOKEN = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
     axios.get("/api/users/get?token=1").then(res => {

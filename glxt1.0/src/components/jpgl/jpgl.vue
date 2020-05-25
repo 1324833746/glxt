@@ -185,7 +185,7 @@ export default {
     axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
     axios.get("/api/rewards/").then(res => {
       this.all_rewards = res.data;
-      console.log(res.data);
+      //console.log(res.data);
     });
     this.tjrd_info = {
       reward_name: null,

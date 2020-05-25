@@ -149,7 +149,7 @@ export default {
               };
               //获取格式化后的时间
               var myDate = new Date().Format("yyyy-MM-ddTHH:mm:ssZ");
-              console.log(myDate);
+              //console.log(myDate);
               axios
                 .put("/api/users/" + res.data[0].pk + "/", {
                   "last_login": myDate.toLocaleString(),
@@ -167,7 +167,7 @@ export default {
           }
         })
         .catch(error => {
-          console.log(error);
+         // console.log(error);
           this.$message.error("登陆失败");
         });
       //跳转

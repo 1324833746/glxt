@@ -31,27 +31,27 @@
           <el-menu :router="true">
             <!--会员管理-->
             <el-menu-item index="hygl">
-              <i class="el-icon-s-custom"></i>
+              <i class="el-icon-user"></i>
               <span slot="title">会员管理</span>
             </el-menu-item>
             <!--添加活动-->
             <el-menu-item index="tjhd">
-              <i class="el-icon-s-custom"></i>
+              <i class="el-icon-plus"></i>
               <span slot="title">添加活动</span>
             </el-menu-item>
             <!--活动管理-->
             <el-menu-item index="hdgl">
-              <i class="el-icon-s-custom"></i>
+              <i class="el-icon-coordinate"></i>
               <span slot="title">活动管理</span>
             </el-menu-item>
             <!--结算管理 -->
             <el-menu-item index="jsgl">
-              <i class="el-icon-s-custom"></i>
+              <i class="el-icon-circle-check"></i>
               <span slot="title">结算管理</span>
             </el-menu-item>
             <!--奖品管理-->
             <el-menu-item index="jpgl">
-              <i class="el-icon-s-custom"></i>
+              <i class="el-icon-shopping-bag-2"></i>
               <span slot="title">奖品管理</span>
             </el-menu-item>
           </el-menu>
@@ -72,7 +72,7 @@ export default {
   },
   beforeCreate() {
     const AUTH_TOKEN = localStorage.getItem("token");
-    console.log(AUTH_TOKEN);
+    //console.log(AUTH_TOKEN);
     axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
     if (!AUTH_TOKEN) {
       this.$router.push({ name: "login" });
@@ -90,7 +90,7 @@ export default {
         }
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         this.$message.error("登录信息过期");
         localStorage.removeItem("token");
         this.$router.push({ name: "login" });
